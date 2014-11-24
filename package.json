@@ -1,0 +1,38 @@
+{
+  "name": "generator-tree",
+  "version": "0.0.1",
+  "description": "Scoffold out a FE app for forest group",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "wh1100717/generator-tree",
+  "author": {
+    "name": "Wang Hao",
+    "email": "me@emptystack.net",
+    "url": "https://github.com/wh1100717"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "tree",
+    "forest"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.17.0",
+    "chalk": "^0.5.0",
+    "yosay": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}
