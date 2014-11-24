@@ -1,4 +1,4 @@
-# generator-tree [![Build Status](https://secure.travis-ci.org/wh1100717/generator-tree.png?branch=master)](https://travis-ci.org/wh1100717/generator-tree)
+# generator-tree
 
 > [Yeoman](http://yeoman.io) generator
 
