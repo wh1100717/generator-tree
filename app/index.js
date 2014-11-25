@@ -44,11 +44,19 @@ var TreeGenerator = yeoman.generators.Base.extend({
       this.src.copy('_gitignore', '.gitignore');
       this.src.copy('coffeelint.json', 'coffeelint.json');
       this.src.copy('karma.conf.coffee', 'karma.conf.coffee');
+      this.src.copy('karma.conf.js', 'karma.conf.js');
       this.src.copy('Gruntfile.coffee', 'Gruntfile.coffee');
+      this.src.copy('Gruntfile.js', 'Gruntfile.js');
       this.src.copy('test/jasmineSpec.coffee', 'test/jasmineSpec.coffee');
+      this.src.copy('test/jasmineSpec.js', 'test/jasmineSpec.js');
       this.src.copy('test/test-main.coffee', 'test/test-main.coffee');
+      this.src.copy('test/test-main.js', 'test/test-main.js');
+
+      this.src.copy('js/wrap.start','src/js/wrap.start')
+      this.src.copy('js/wrap.end','src/js/wrap.end')
 
       this.template('js/coffee.tpl', 'src/js/' + this.appname + '.coffee')
+      this.template('js/js.tpl', 'src/js/' + this.appname + '.js')
       this.template('less/less.tpl', 'src/less/' + this.appname + '.less')
       this.template('index.html', 'index.html');
     },

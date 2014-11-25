@@ -1,0 +1,15 @@
+
+  var SomeModuleNameSouldBeSpecified = "hello world"
+
+  if ( typeof define === "function" && define.amd ) {
+    define( "SomeModuleNameSouldBeSpecified", [], function() {
+      return SomeModuleNameSouldBeSpecified;
+    });
+  }
+
+  if (!noGlobal) {
+    window.SomeModuleNameSouldBeSpecified = SomeModuleNameSouldBeSpecified
+  }
+
+  return SomeModuleNameSouldBeSpecified
+}));
