@@ -1,7 +1,6 @@
-define (require, exports, module) ->
+define ->
     "use strict"
 
     <%= appname %> = {}
 
-
-    module.exports = <%= appname %>
+    return <%= appname %>
