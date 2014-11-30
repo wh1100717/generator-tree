@@ -2,5 +2,8 @@
 define(function() {
   "use strict";
   var <%= appname %> = {};
+  <%= appname %>.init = function(){
+    console.log("<%= appname %> Init.");
+  }
   return <%= appname %>;
 });
