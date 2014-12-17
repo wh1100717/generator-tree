@@ -67,6 +67,12 @@ module.exports = (grunt) ->
                 src: ["module/**/*.js"]
                 dest: ".tmp/build/"
             }
+            img: {
+                expand: true
+                cwd: "src/"
+                src: ["img/**"]
+                dest: ".tmp/build/"
+            }
             build: {
                 expand: true
                 cwd: ".tmp/build/"
@@ -86,13 +92,13 @@ module.exports = (grunt) ->
         }
         connect: {
             options: {
-                port: 9007
+                port: 9008
                 livereload: 42201
                 hostname: 'localhost'
                 base: '.'
                 middleware: (connect, options, middlewares) ->
                     middlewares.unshift (req, res, next) ->
-                        req.url = "/.tmp/build" + req.url if req.url isnt '/' and req.url.indexOf('http://g.tbcdn.cn') is -1
+                        req.url = "/.tmp/build" + req.url if req.url.split("/").length isnt 2 and req.url.indexOf('http://g.tbcdn.cn') is -1
                         return next()
                     return middlewares
             },
@@ -111,6 +117,10 @@ module.exports = (grunt) ->
                 files: 'src/js/**/*.js'
                 tasks: ['copy:js']
             }
+            img: {
+                files: 'src/img/**'
+                tasks: ['copy:img']
+            }
             module: {
                 files: 'src/module/**'
                 tasks: ['copy:module']
@@ -123,6 +133,8 @@ module.exports = (grunt) ->
                     '{,*/}*.html'
                     '.tmp/build/**/css/{,*/}*.css'
                     '.tmp/build/**/js/{,*/}*.js'
+                    '.tmp/build/**/module/**'
+                    '.tmp/build/**/img/**'
                 ]
             }
         }
@@ -132,15 +144,14 @@ module.exports = (grunt) ->
         'clean:tmp'
         'copy:js'
         'copy:module'
+        'copy:img'
         'less'
     ]
 
     grunt.registerTask 'build', [
         'clean:*'                       #Clean .tmp && build folder
-        'copy:js'                       #Copy js files form src/js to .tmp/build/src/js
-        'copy:module'                   #Copy module files from src/module to .tmp/build/src/module
         'less', 'cssmin', 'usebanner'   #Build Css
-        'copy:build'                    #Copy files from .tmp to build
+        'copy:*'
         'uglify:js'                     #Uglify JS
     ]
 
@@ -151,27 +162,3 @@ module.exports = (grunt) ->
     grunt.registerTask 'default', ['serve']
 
     return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

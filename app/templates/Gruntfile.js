@@ -58,6 +58,12 @@ module.exports = function(grunt) {
         src: ["module/**/*.js"],
         dest: ".tmp/build/"
       },
+      img: {
+        expand: true,
+        cwd: "src/",
+        src: ["img/**"],
+        dest: ".tmp/build/"
+      },
       build: {
         expand: true,
         cwd: ".tmp/build/",
@@ -79,13 +85,13 @@ module.exports = function(grunt) {
     },
     connect: {
       options: {
-        port: 9007,
+        port: 9008,
         livereload: 42201,
         hostname: 'localhost',
         base: '.',
         middleware: function(connect, options, middlewares) {
           middlewares.unshift(function(req, res, next) {
-            if (req.url !== '/' && req.url.indexOf('http://g.tbcdn.cn') === -1) {
+            if (req.url.split("/").length !== 2 && req.url.indexOf('http://g.tbcdn.cn') === -1) {
               req.url = "/.tmp/build" + req.url;
             }
             return next();
@@ -108,6 +114,10 @@ module.exports = function(grunt) {
         files: 'src/js/**/*.js',
         tasks: ['copy:js']
       },
+      img: {
+        files: 'src/img/**',
+        tasks: ['copy:img']
+      },
       module: {
         files: 'src/module/**',
         tasks: ['copy:module']
@@ -116,12 +126,12 @@ module.exports = function(grunt) {
         options: {
           livereload: '<%= connect.options.livereload %>'
         },
-        files: ['{,*/}*.html', '.tmp/build/**/css/{,*/}*.css', '.tmp/build/**/js/{,*/}*.js']
+        files: ['{,*/}*.html', '.tmp/build/**/css/{,*/}*.css', '.tmp/build/**/js/{,*/}*.js', '.tmp/build/**/module/**', '.tmp/build/**/img/**']
       }
     }
   });
-  grunt.registerTask('servebuild', ['clean:tmp', 'copy:js', 'copy:module', 'less']);
-  grunt.registerTask('build', ['clean:*', 'copy:js', 'copy:module', 'less', 'cssmin', 'usebanner', 'copy:build', 'uglify:js']);
+  grunt.registerTask('servebuild', ['clean:tmp', 'copy:js', 'copy:module', 'copy:img', 'less']);
+  grunt.registerTask('build', ['clean:*', 'less', 'cssmin', 'usebanner', 'copy:*', 'uglify:js']);
   grunt.registerTask('serve', ['servebuild', 'connect:livereload', 'watch']);
   grunt.registerTask('server', ['serve']);
   grunt.registerTask('default', ['serve']);
