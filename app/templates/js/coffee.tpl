@@ -1,4 +1,4 @@
-define ->
+define (require, exports, module) ->
     "use strict"
 
     <%= appname %> = {}
@@ -6,4 +6,4 @@ define ->
     <%= appname %>.init = ->
         console.log("<%= appname %> Init.")
 
-    return <%= appname %>
+    module.exports = <%= appname %>

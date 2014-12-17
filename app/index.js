@@ -36,6 +36,7 @@ var TreeGenerator = yeoman.generators.Base.extend({
     app: function () {
       this.dest.mkdir('src');
       this.dest.mkdir('src/js');
+      this.dest.mkdir('src/module');
       this.dest.mkdir('src/less');
 
       this.template('_package.json', 'package.json');
@@ -44,6 +45,8 @@ var TreeGenerator = yeoman.generators.Base.extend({
       this.src.copy('coffeelint.json', 'coffeelint.json');
       this.src.copy('Gruntfile.coffee', 'Gruntfile.coffee');
       this.src.copy('Gruntfile.js', 'Gruntfile.js');
+      this.src.copy('module/module1.coffee', 'src/module/module1.coffee');
+      this.src.copy('module/module1.js', 'src/module/module1.js');
 
       this.template('js/coffee.tpl', 'src/js/' + this.appname + '.coffee')
       this.template('js/js.tpl', 'src/js/' + this.appname + '.js')
