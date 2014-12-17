@@ -10,6 +10,7 @@ module.exports = (grunt) ->
          * <%= pkg.name %>
          * Copyright <%= grunt.template.today("yyyy-mm-dd") %> <%= pkg.author.name %>
          */
+         
         """
         clean: {
             build: ['build']
@@ -81,6 +82,15 @@ module.exports = (grunt) ->
             }
         }
         uglify: {
+            options: {
+                mangle: {
+                    except: ['require']
+                }
+                normalizeDirDefines: true
+                skipDirOptimize: false
+                banner: '<%= banner %>'
+                preserveComments: 'some'
+            }
             js: {
                 files: [{
                     expand: true

@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    banner: "/*\n * <%= pkg.name %>\n * Copyright <%= grunt.template.today(\"yyyy-mm-dd\") %> <%= pkg.author.name %>\n */",
+    banner: "/*\n * <%= pkg.name %>\n * Copyright <%= grunt.template.today(\"yyyy-mm-dd\") %> <%= pkg.author.name %>\n */\n ",
     clean: {
       build: ['build'],
       tmp: ['.tmp']
@@ -72,6 +72,15 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
+      options: {
+        mangle: {
+          except: ['require']
+        },
+        normalizeDirDefines: true,
+        skipDirOptimize: false,
+        banner: '<%= banner %>',
+        preserveComments: 'some'
+      },
       js: {
         files: [
           {

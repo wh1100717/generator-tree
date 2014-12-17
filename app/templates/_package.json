@@ -2,7 +2,7 @@
   "name": "<%= appname %>",
   "version": "0.0.1",
   "author": {
-    "name": "Eric Wang"
+    "name": "Forest"
   },
   "engines": {
     "node": ">= 0.8.0"
