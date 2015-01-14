@@ -7,10 +7,6 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-    "test": "grunt test"
-  },
-  "main": "dist/0.0.1/<%= appname %>.js",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-banner": "~0.2.3",

@@ -28,6 +28,7 @@ var TreeGenerator = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (answers) {
       this.appname = answers.name
+      this.Appname = answers.name.substring(0,1).toUpperCase() + answers.name.substring(1)
       done();
     }.bind(this));
   },
@@ -40,16 +41,17 @@ var TreeGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('src/less');
 
       this.template('_package.json', 'package.json');
-      this.template('_bower.json', 'bower.json');
       this.src.copy('_gitignore', '.gitignore');
       this.src.copy('coffeelint.json', 'coffeelint.json');
       this.src.copy('Gruntfile.coffee', 'Gruntfile.coffee');
       this.src.copy('Gruntfile.js', 'Gruntfile.js');
       this.src.copy('module/module1.coffee', 'src/module/module1.coffee');
       this.src.copy('module/module1.js', 'src/module/module1.js');
+      this.src.copy('js/home.coffee', 'src/js/home.coffee');
+      this.src.copy('js/home.js', 'src/js/home.js');
 
-      this.template('js/coffee.tpl', 'src/js/' + this.appname + '.coffee')
-      this.template('js/js.tpl', 'src/js/' + this.appname + '.js')
+      this.template('js/seed_coffee.tpl', 'src/js/seed.coffee')
+      this.template('js/seed_js.tpl', 'src/js/seed.js')
       this.template('less/less.tpl', 'src/less/' + this.appname + '.less')
       this.template('index.html', 'index.html');
     },

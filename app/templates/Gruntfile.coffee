@@ -6,9 +6,11 @@ module.exports = (grunt) ->
     grunt.initConfig {
         pkg: grunt.file.readJSON 'package.json'
         banner: """
-        /*
+
+        /**
          * <%= pkg.name %>
-         * Copyright <%= grunt.template.today("yyyy-mm-dd") %> <%= pkg.author.name %>
+         * Version: <%= pkg.version %>
+         * Copyright 2014 - <%= grunt.template.today("yyyy") %> <%= pkg.author %>
          */
          
         """
@@ -37,7 +39,7 @@ module.exports = (grunt) ->
             }
             core: {
                 files: {
-                    '.tmp/build/css/<%= pkg.name %>.min.css': '.tmp/build/css/<%= pkg.name %>.css'
+                    '.tmp/build/css/<%= pkg.name %>.css': '.tmp/build/css/<%= pkg.name %>.css'
                 }
             }
         }
@@ -50,7 +52,6 @@ module.exports = (grunt) ->
                 files: {
                     src: [
                         '.tmp/build/css/<%= pkg.name %>.css'
-                        '.tmp/build/css/<%= pkg.name %>.min.css'
                     ]
                 }
             }

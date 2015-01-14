@@ -3,19 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title><%= appname %></title>
-    <link href="http://g.tbcdn.cn/forest/grass/0.0.8/css/grass.css" rel="stylesheet">
-    <link href="css/<%= appname %>.css" rel="stylesheet">
+    <link href="http://g.tbcdn.cn/forest/grass/0.1.0/css/grass.css" rel="stylesheet">
+    <link href="http://g.tbcdn.cn/forest/grass/0.1.0/css/default-theme.css" rel="stylesheet">
+    <link href="/css/<%= appname %>.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       Hello World
     </div> <!-- /container -->
-    <script src="http://g.tbcdn.cn/forest/grass/0.0.8/js/grass.min.js"></script>
 
+    <script src="http://g.tbcdn.cn/forest/grass/0.1.0/js/grass.min.js"></script>
+    <script src="/js/seed.js"></script>
     <script>
-      require(['js/<%= appname %>'], function(<%= appname %>){
-        <%= appname %>.init();
+    Grass.ready(function(){
+      require(['js/home'], function(Home){
+        Home.init();
       })
+    })
     </script>
   </body>
 </html>

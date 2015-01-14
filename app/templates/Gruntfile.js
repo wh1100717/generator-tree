@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    banner: "/*\n * <%= pkg.name %>\n * Copyright <%= grunt.template.today(\"yyyy-mm-dd\") %> <%= pkg.author.name %>\n */\n ",
+    banner: "\n/**\n * <%= pkg.name %>\n * Version: <%= pkg.version %>\n * Copyright 2014 - <%= grunt.template.today(\"yyyy\") %> <%= pkg.author %>\n */\n ",
     clean: {
       build: ['build'],
       tmp: ['.tmp']
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
       core: {
         files: {
-          '.tmp/build/css/<%= pkg.name %>.min.css': '.tmp/build/css/<%= pkg.name %>.css'
+          '.tmp/build/css/<%= pkg.name %>.css': '.tmp/build/css/<%= pkg.name %>.css'
         }
       }
     },
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
           banner: '<%= banner %>'
         },
         files: {
-          src: ['.tmp/build/css/<%= pkg.name %>.css', '.tmp/build/css/<%= pkg.name %>.min.css']
+          src: ['.tmp/build/css/<%= pkg.name %>.css']
         }
       }
     },
