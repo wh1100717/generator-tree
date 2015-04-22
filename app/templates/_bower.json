@@ -1,0 +1,8 @@
+{
+  "name": "<%= appname %>",
+  "author": {
+    "name": "Forest"
+  },
+  "dependencies": {
+  }
+}

@@ -32,6 +32,13 @@ module.exports = (grunt) ->
                 }
             }
         }
+        nunjucks: {
+            precompile: {
+                baseDir: 'src/tpl/'
+                src: 'src/tpl/**/*'
+                dest: '.tmp/build/tpl/templates.js'
+            }
+        }
         cssmin: {
             options: {
                 keepSpecialComments: '*'
@@ -75,6 +82,12 @@ module.exports = (grunt) ->
                 src: ["img/**"]
                 dest: ".tmp/build/"
             }
+            bower: {
+                expand: true
+                cwd: "bower_components/"
+                src: ["**/*"]
+                dest: ".tmp/build/vendor/"
+            }
             build: {
                 expand: true
                 cwd: ".tmp/build/"
@@ -109,13 +122,23 @@ module.exports = (grunt) ->
                 base: '.'
                 middleware: (connect, options, middlewares) ->
                     middlewares.unshift (req, res, next) ->
-                        req.url = "/.tmp/build" + req.url if req.url.split("/").length isnt 2 and req.url.indexOf('http://g.tbcdn.cn') is -1
+                        req.url = "/index.html" if req.url is "/"
+                        if req.url.indexOf("http://") isnt -1
+                            return next()
+                        if req.url.indexOf(".json") isnt -1
+                            return next()
+                        if req.url.indexOf(".html") isnt -1
+                            req.url = "/view" + req.url
+                            return next()
+                        req.url = "/.tmp/build" + req.url
                         return next()
                     return middlewares
-            },
+            }
             livereload: {
                 options: {
-                    open: true
+                    open: {
+                        target: "http://localhost:9008/index.html?grass_debug=true"
+                    }
                 }
             }
         }
@@ -136,6 +159,10 @@ module.exports = (grunt) ->
                 files: 'src/module/**'
                 tasks: ['copy:module']
             }
+            tpl: {
+                files: 'src/tpl/**/*.tpl'
+                tasks: ['nunjucks']
+            }
             livereload: {
                 options: {
                     livereload: '<%= connect.options.livereload %>'
@@ -146,6 +173,7 @@ module.exports = (grunt) ->
                     '.tmp/build/**/js/{,*/}*.js'
                     '.tmp/build/**/module/**'
                     '.tmp/build/**/img/**'
+                    '.tmp/build/**/tpl/**'
                 ]
             }
         }
@@ -156,6 +184,8 @@ module.exports = (grunt) ->
         'copy:js'
         'copy:module'
         'copy:img'
+        'copy:bower'
+        'nunjucks'
         'less'
     ]
 

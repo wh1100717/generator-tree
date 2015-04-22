@@ -1,6 +1,6 @@
 {
   "name": "generator-tree",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Scoffold out a FE app for forest group",
   "license": "MIT",
   "main": "app/index.js",

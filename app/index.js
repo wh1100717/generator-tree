@@ -35,25 +35,34 @@ var TreeGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.dest.mkdir('src');
-      this.dest.mkdir('src/js');
-      this.dest.mkdir('src/module');
-      this.dest.mkdir('src/less');
-
       this.template('_package.json', 'package.json');
+      this.template('_bower.json', 'bower.json');
       this.src.copy('_gitignore', '.gitignore');
       this.src.copy('coffeelint.json', 'coffeelint.json');
       this.src.copy('Gruntfile.coffee', 'Gruntfile.coffee');
       this.src.copy('Gruntfile.js', 'Gruntfile.js');
-      this.src.copy('module/module1.coffee', 'src/module/module1.coffee');
-      this.src.copy('module/module1.js', 'src/module/module1.js');
+
+      this.dest.mkdir('view');
+      this.dest.mkdir('src');
+      this.dest.mkdir('src/img');
+      this.dest.mkdir('src/js');
+      this.dest.mkdir('src/less');
+      this.dest.mkdir('src/module');
+      this.dest.mkdir('src/tpl');
+
+      this.src.copy('view/index.html', 'view/index.html');
+      this.template('js/seed_coffee.tpl', 'src/js/seed.coffee');
+      this.template('js/seed_js.tpl', 'src/js/seed.js');
+      this.src.copy('img/bg-body.png', 'src/img/bg-body.png');
+      this.src.copy('img/favicon.ico', 'src/img/favicon.ico');
+      this.src.copy('img/logo.png', 'src/img/logo.png');
       this.src.copy('js/home.coffee', 'src/js/home.coffee');
       this.src.copy('js/home.js', 'src/js/home.js');
-
-      this.template('js/seed_coffee.tpl', 'src/js/seed.coffee')
-      this.template('js/seed_js.tpl', 'src/js/seed.js')
-      this.template('less/less.tpl', 'src/less/' + this.appname + '.less')
-      this.template('index.html', 'index.html');
+      this.template('less/less.tpl', 'src/less/' + this.appname + '.less');
+      this.src.copy('module/module1.coffee', 'src/module/module1.coffee');
+      this.src.copy('module/module1.js', 'src/module/module1.js');
+      this.src.copy('tpl/index.tpl', 'src/tpl/index.tpl');
+      this.template('tpl/layout.tpl', 'src/tpl/layout.tpl');
     },
 
     projectfiles: function () {

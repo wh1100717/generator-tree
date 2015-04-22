@@ -1,11 +1,11 @@
 {
   "name": "<%= appname %>",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": {
     "name": "Forest"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -18,6 +18,8 @@
     "grunt-contrib-less": "~0.11.4",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "load-grunt-tasks": "*"
+    "grunt-nunjucks": "^0.1.4",
+    "load-grunt-tasks": "*",
+    "nunjucks": "^1.2.0"
   }
 }
